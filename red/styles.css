@@ -1,14 +1,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #111;
-}
-
-#navbar {
-  position: sticky;
-  top: 0;
-  overflow: hidden;
-  background-color: #222;
-  transition-duration: 0.2s;
+  background-color: #131313;
 }
 
 /* width */
@@ -34,34 +26,32 @@ body {
   background: #777; 
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 5px;
-}
-
-/* Clearfix (clear floats) */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
+#navbar {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background-color: #181818;
+  transition-duration: 0.2s;
 }
 
 .bigblue {
     text-align: center;
-    font-size: 50px;
-    color: rgb(255, 255, 255);
-    font-family:'Courier New', Courier, monospace;
-    border: 2px solid WHITE;
+    font-size: 30px;
+    color: rgb(103, 212, 255);
+    font-family:arial;
+    border: 2px solid rgb(103, 212, 255);
 }
 
 iframe {
     border: 0px solid black;
     padding-left: 20px;
+}
+
+hr {
+    height: 1px;
+    color: #222222;
+    background-color: #202020;
+    border: none;
 }
 
 h2 {
@@ -81,7 +71,7 @@ h2 {
 }
 
 h1 {
-    color: white;
+    color: rgb(170, 170, 170);
     padding-left: 20px;
 }
 
@@ -91,14 +81,24 @@ p {
 }
 
 #navbar a:hover {
-  background-color: #333;
-  color: white;
+  background-color: #181818;
+  color: #dbd5ff;
+  text-decoration: none;
   transition-duration: 0.2s;
 }
 
+footer {
+  color: #dbd5ff;
+  text-align: center;
+  font-family: arial;
+  background-color: #000000;
+  border-radius:30px;
+}
+
 #navbar a.active {
-  background-color: #333;
-  color: white;
+  background-color: #181818;
+  color: #c6bcff;
+  text-decoration: none;
   transition-duration: 0.2s;
 }
 
@@ -150,6 +150,7 @@ p {
     background: #333;
     box-shadow: 0 2px 3px -1px #b5b5b5;
     transition-duration: 0.4s;
+    
 }
         
 #input, #output {
@@ -180,10 +181,10 @@ p {
 }
 		
 a {
-	color: orange;
+	color: #c6bcff;
     transition-duration: 0.2s;
     padding-left: 20px;
-    text-decoration: none;
+    text-decoration: underline;
 }
 		
 		
@@ -192,7 +193,7 @@ span {
 }
 
 a:hover {
-	color: white;
+	color: #c6bcff;
 	text-decoration: none;
 	transition-duration: 0.2s;
 }
@@ -228,8 +229,8 @@ font-size: 13px;
         
 .button3:hover {
 background-color: rgb(0, 0, 0);
-color: white;
-border: 2px solid green;
+color: #c6bcff;
+border: 2px solid #c6bcff;
 border-radius: 0px;
 font-size: 13px;
 transition-duration: 0.2s;
