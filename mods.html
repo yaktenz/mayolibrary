@@ -1,103 +1,217 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="assets/mods.png">
-  <link rel="stylesheet" href="styles.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayonaise Library - Mods</title>
+    <link rel="icon" href="resources/favicon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light gray text */
+        }
+        .container {
+            max-width: 1200px;
+        }
+        /* Custom Scrollbar Styles */
+        /* For Webkit browsers (Chrome, Safari) */
+        ::-webkit-scrollbar {
+            width: 12px; /* Width of the scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Color of the track */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Color of the scroll thumb */
+            border-radius: 10px;
+            border: 3px solid #2d3748; /* Creates a padding effect */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #636b7a; /* Color of the scroll thumb on hover */
+        }
+
+        /* For Firefox */
+        html {
+            scrollbar-width: thin; /* "auto" or "thin" */
+            scrollbar-color: #4a5568 #2d3748; /* thumb color track color */
+        }
+        /* Custom styles for video responsiveness */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem; /* Rounded corners for video container */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .originallink {
+            color: #777;
+        }
+
+        .originallink:hover {
+            color: white;
+        }
+    </style>
 </head>
-<body>
+<body class="text-gray-100">
+    <nav class="bg-gray-800 p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-white text-2xl font-bold">Mayonaise Library</a>
+            
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="mobileMenuButton" class="text-gray-300 hover:text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
 
-<title>Mods</title><body><div class="link-generate">
+            <!-- Desktop menu -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+                <a href="mods.html" class="text-red-500 hover:text-red-400 transition duration-300">Mods</a>
+                <div class="relative">
+                    <button id="dropdownButton" class="text-gray-300 hover:text-white transition duration-300 focus:outline-none flex items-center">
+                        More
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-1 hidden">
+                        <a href="https://youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">YouTube</a>
+                        <a href="https://discord.gg/R6VVZmBqZu" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">Discord</a>
+                        <a href="https://stadiastudios.github.io/Stadia/" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">StadiaStudios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div id="navbar">
-  <a href="index.html">Home</a>
-  <a href="https://sites.google.com/view/mayonaise/browse">Website</a>
-    <a  class="active" href="mods.html">Mods</a>
-  <a href="settings.html">Settings</a>
-</div>
+        <!-- Mobile menu content -->
+        <div id="mobileMenu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
+                <a href="mods.html" class="block px-3 py-2 rounded-md text-base font-medium text-red-500 hover:text-red-400 hover:bg-gray-700">Mods</a>
+                <div class="relative">
+                    <button id="mobileDropdownButton" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none flex items-center justify-between">
+                        More
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="mobileDropdownMenu" class="mt-1 w-full bg-gray-700 rounded-md shadow-lg py-1 hidden">
+                        <a href="https://youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">YouTube</a>
+                        <a href="https://discord.gg/R6VVZmBqZu" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">Discord</a>
+                        <a href="https://stadiastudios.github.io/Stadia/" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">StadiaStudios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<h1 class="bigblue">MODS</h1>
-<h1>MAYONAISE</h1>
+    <main class="container mx-auto my-8 p-6 bg-gray-900 rounded-lg shadow-xl">
+        <section id="mods-section" class="mb-12">
+            <h2 class="text-4xl font-bold text-white mb-6">Game Mods</h2>
+            <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                Explore a variety of exciting mods for your favorite games!
+                Enhance your gameplay experience with new features, characters, and more.
+            </p>
 
-<hr>
-<h2>The Elder Scrolls V: Skyrim | Edit Race + Essential's Mod </h2>
-<p>Description: adds batch files that you can alter your game with + Essential Mods. Super easy to install and setup, Requires nothing. Works with both SE/or/AE. Install guide & everything else needed is included. Safe to use and wont mess up your game! 
-<br><br>
-Free Space: 9.2KB<br>
-Requirements: THE ELDER SCROLLS V: SKYRIM - Works on any Edition
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example Mod Card 1 -->
+                <div class="bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-semibold text-white mb-3">RDSV - Silent Virtues Mod Menu for RDR1</h3>
+                    <p class="text-gray-300 mb-4">I dont own rights to these files this is for a YouTube tutorial Original Links here: <a class="originallink" href="https://hazardx.com/files/gta4_net_scripthook-83">ScriptHook - HazardX</a><br>
+                        <a class="originallink" href="https://www.nexusmods.com/reddeadredemption/mods/184?tab=files&file_id=925"> Silent Virtues - Nexus</a>
+                    </p>
+                    <a href="https://mega.nz/file/dTFUibZI#LAibMFG9M2xY-EqSEsKVmcEfz9hQpC1usTX5eAxpdtc" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Mod</a><br>
+                    <a href="https://youtu.be/YBrf-BIc6EA" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Tutorial Video</a>
+                </div>
 
-</p>
-<h2>How to Import to Game</h2><p>
-Install process is easy as pasting all the files in the "paste" folder
-<br>
-inside your skyrim directory, Make sure your not pasting the folder tho
-<br>
-ONLY THE TEXT FILES
-</p>
+                <!-- Example Mod Card 2 -->
+                <div class="bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-semibold text-white mb-3">RyzenCheats for FiveM</h3>
+                    <p class="text-gray-300 mb-4">Get free FiveM mod files, Subsection categories. Graphic Mods, Aimbot, OnePunch and More! No Virus, No Exe just a simple folder with mods</p>
+                    <a href="https://drive.google.com/uc?export=download&id=1SSMmu_IfYLx-AZWsbdcsUTGYbIyWTpTY" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Latest V1.11.1</a><br>
+                    <a href="https://youtu.be/C_J98I7y_vc" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Tutorial Video</a>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-semibold text-white mb-3">WeMod Premium</h3>
+                    <p class="text-gray-300 mb-4">This Guide shows you how to get WeMod Premium for free</p>
+                    <a href="https://drive.google.com/uc?export=download&id=1GvokSSTAj9z2boMNVScHTWj-KVV8FM7M" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Zip</a><br>
+                    <a href="https://youtu.be/US72-n1CJ9o" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Tutorial Video</a>
+                </div>
 
-<h2>Showcase</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xIYRC4pmtao?si=arHEIc2V7IkTqU6H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<br><h2>Download Links</h2>
-<a href="https://www.nexusmods.com/skyrimspecialedition/mods/151938?tab=description">Download on Nexus</a><br>
-<h2>Archived</h2>
-<a href="https://www.nexusmods.com/skyrimspecialedition/mods/151938?tab=files&file_id=634908">Download V1.0.0</a><br>
-<a href="https://www.nexusmods.com/skyrimspecialedition/mods/151938?tab=files&file_id=635101">Download V1.2.1</a><br>
-<a href="https://www.nexusmods.com/skyrimspecialedition/mods/151938?tab=files&file_id=635433">Download V1.2.2</a><br>
-<a href="https://drive.google.com/file/d/1VqppNrVpoqwEEYPf3WN_cSMJ2PhWrRaE/view?usp=sharing">Download V1.3.2</a><br>
-<br><hr><br>
+                <!-- Add more mod cards as needed -->
+            </div>
+        </section>
+    </main>
 
+    <footer class="text-center py-6 mt-8 text-gray-400 text-sm">
+        &copy; 2025 MAYONAISE. All rights reserved.
+    </footer>
 
+    <script>
+        // JavaScript for dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownButton = document.getElementById('dropdownButton');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileDropdownButton = document.getElementById('mobileDropdownButton');
+            const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
 
+            // Desktop dropdown
+            if (dropdownButton && dropdownMenu) {
+                dropdownButton.addEventListener('click', function() {
+                    dropdownMenu.classList.toggle('hidden');
+                });
+            }
 
+            // Mobile menu toggle
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
 
-<hr>
-<h2>Red Dead Redemption | RDSV</h2>
+            // Mobile dropdown
+            if (mobileDropdownButton && mobileDropdownMenu) {
+                mobileDropdownButton.addEventListener('click', function() {
+                    mobileDropdownMenu.classList.toggle('hidden');
+                });
+            }
 
-<h2>Showcase</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YBrf-BIc6EA?si=qWRrfr5jlCR5kXiZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<br><h2>Download Links</h2>
-<a href="https://mega.nz/file/dTFUibZI#LAibMFG9M2xY-EqSEsKVmcEfz9hQpC1usTX5eAxpdtc">Download RDSV</a><br>
-<h2>Original Mod Pages</h2>
-<a href="https://hazardx.com/files/gta4_net_scripthook-83">Download ScriptHook - HazardX</a><br>
-<a href="https://www.nexusmods.com/reddeadredemption/mods/184?tab=files&file_id=925">Silent Virtues - Nexus</a><br>
-<br><hr><br>
-
-
-
-
-
-<hr>
-<h2>GTAV/FIVEM | RyzenCheats </h2>
-<p>Description: Get free FiveM mod files, Subsection categories. Graphic Mods, Aimbot, OnePunch and More! No Virus, No Exe just a simple folder with mods
-<br><br>
-Free Space: 48.2MB<br>
-
-Publisher: Mayonaise<br>
-
-Requirements: GTA V, FiveM Installed<br>
-
-</p>
-
-<h2>Showcase</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/C_J98I7y_vc?si=nRCqGPyYO5XAD0W4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<br><h2>Download Links</h2>
-<a href="https://drive.google.com/uc?export=download&id=1SSMmu_IfYLx-AZWsbdcsUTGYbIyWTpTY">Download Latest V1.11.1</a><br>
-<br><hr><br>
-
-
-
-
-
-
-
-<hr>
-<h2>WeMod | Free Premium</h2>
-<p>This Guide shows you how to get WeMod Premium for free</p>
-
-<h2>Install Guide</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/US72-n1CJ9o?si=vhCzqpL9jWr2pUtw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<br><h2>Links</h2>
-<a href="https://temp-mail.org/en/">Tempmail</a><br>
-<a href="https://drive.google.com/uc?export=download&id=1GvokSSTAj9z2boMNVScHTWj-KVV8FM7M">Download WeMod Premium</a><br>
-<br><hr><br>
+            // Close all dropdowns if the user clicks outside of them
+            window.addEventListener('click', function(event) {
+                if (dropdownButton && dropdownMenu && !dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.add('hidden');
+                }
+                if (mobileDropdownButton && mobileDropdownMenu && !mobileDropdownButton.contains(event.target) && !mobileDropdownMenu.contains(event.target)) {
+                    mobileDropdownMenu.classList.add('hidden');
+                }
+                // Keep mobile menu open if clicking inside it, close if clicking outside nav entirely
+                if (mobileMenu && !mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target) && !event.target.closest('nav')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 
 </body>
+</html>

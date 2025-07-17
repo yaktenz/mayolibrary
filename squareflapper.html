@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayonaise Library</title>
-    <link rel="icon" href="resources/favicon.png" type="image/x-icon">
+    <title>SquareFlapper - Download Game</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="resources/favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -16,22 +16,6 @@
         .container {
             max-width: 1200px;
         }
-        /* Custom styles for video responsiveness */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.5rem; /* Rounded corners for video container */
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
         /* Custom Scrollbar Styles */
         /* For Webkit browsers (Chrome, Safari) */
         ::-webkit-scrollbar {
@@ -58,27 +42,27 @@
             scrollbar-width: thin; /* "auto" or "thin" */
             scrollbar-color: #4a5568 #2d3748; /* thumb color track color */
         }
-
-        /* Banner specific styles */
-        .banner {
-            background-image: url('resources/squareflapper-banner.png'); /* Placeholder banner image for game */
-            background-size: cover;
-            background-position: center;
-            height: 450px; /* Adjust height as needed */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        /* Custom styles for video responsiveness */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem; /* Rounded corners for video container */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Ensures iframe fills its container */
         }
     </style>
 </head>
 <body class="text-gray-100">
     <nav class="bg-gray-800 p-4 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
+            <!-- Link back to the main library/home page -->
             <a href="index.html" class="text-white text-2xl font-bold">Mayonaise Library</a>
             
             <!-- Mobile menu button -->
@@ -92,7 +76,7 @@
 
             <!-- Desktop menu -->
             <div class="hidden md:flex items-center space-x-4">
-                <a href="index.html" class="text-red-500 hover:text-red-400 transition duration-300">Home</a>
+                <a href="index.html" class="text-gray-300 hover:text-white transition duration-300">Home</a>
                 <a href="mods.html" class="text-gray-300 hover:text-white transition duration-300">Mods</a>
                 <div class="relative">
                     <button id="dropdownButton" class="text-gray-300 hover:text-white transition duration-300 focus:outline-none flex items-center">
@@ -113,7 +97,7 @@
         <!-- Mobile menu content -->
         <div id="mobileMenu" class="md:hidden hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-red-500 hover:text-red-400 hover:bg-gray-700">Home</a>
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
                 <a href="mods.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Mods</a>
                 <div class="relative">
                     <button id="mobileDropdownButton" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none flex items-center justify-between">
@@ -132,51 +116,114 @@
         </div>
     </nav>
 
-    <!-- Banner Section -->
-    <div class="banner">
-        <h1 class="text-5xl md:text-6xl lg:text-7xl">MAYONAISE</h1>
-    </div>
-
-    <main class="container mx-auto my-8 p-6 bg-gray-900 rounded-lg shadow-xl">
-        <section id="about-section" class="mb-12">
-            <h2 class="text-4xl font-bold text-white mb-6">About Me</h2>
-            <p class="text-lg text-gray-300 leading-relaxed">
-                Here you can find links Tools apps and more created by me, i re done this website but with a little bit of AI.
-                The main reason i switched from google sites to github was to code my website instead of using google
+    <main class="container mx-auto my-8 p-6 bg-gray-900 rounded-lg shadow-xl text-center">
+        <section id="game-download-section" class="mb-12">
+            <h1 class="text-5xl font-extrabold text-white mb-6">SquareFlapper</h1>
+            <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-8">
+                This game is a 2D Game based on a Customizable Flappy Bird. This Game runs with a Software called Eblava which supports the maps, More maps are coming soon. Each map has its own unique Theme and Speed for gameplay.
             </p>
-        </section>
 
-        <section id="my-games-section" class="mb-12">
-            <h2 class="text-4xl font-bold text-white mb-6">My Games</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">SquareFlapper</h3>
-                    <p class="text-gray-300 mb-4">This game is a 2D Game based on a Customizable Flappy Bird. This Game runs with a Software called Eblava which supports the maps, More maps are coming soon. Each map has its own unique Theme and Speed for gameplay.</p>
-                    <a href="squareflapper.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Page</a>
-                </div>
+            <!-- YouTube Video Embed for Gameplay Preview -->
+            <!-- Reduced margin-bottom from mb-8 to mb-6 to bring the button closer -->
+            <div class="video-container mx-auto max-w-3xl mb-6">
+                <iframe
+                    src="https://www.youtube.com/embed/gp-4ysWVmTY?si=Y2T27sKQo3lSLKDh"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <a href="https://drive.google.com/uc?export=download&id=16Xf2gHxZqpxp0V8H0sLPaNSrnKQyB4js" download class="inline-block bg-green-600 hover:bg-green-700 text-white text-3xl font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out mt-6">
+                Download Latest (V1.15.6)
+            </a>
+
+            <p class="text-gray-400 text-sm mt-6">
+                (File Size: ~61MB | Compatible with Windows/macOS)
+            </p>
+
+            <!-- Older Versions Section -->
+            <div class="mt-12 text-left max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4">Online Versions:</h2>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li>
+                        <a href="https://yaktenz.github.io/EnderBloxV1.5/" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            EnderBlox V1.5 DLCS + MODS, ORIGINAL GAME WINTERFEST 2023 ONLINE
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://yaktenz.github.io/squareflapper/online/SquareFlapper/index.html" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.11.5 Online
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://sites.google.com/view/classicbloxo/default/classic-easy" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            EnderBlox Online Original ONLINE
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mt-12 text-left max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4">How to Play:</h2>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li>Download and Extract the Zip File.</li>
+                    <li>run index.html</li>
+                    <li>Tap Browse and Choose a map</li>
+                    <li>Navigate through the gaps in the obstacles.</li>
+                    <li>Avoid hitting the obstacles</li>
+                    <li>Challenge your high score!</li>
+                </ul>
+
+                <h2 class="text-3xl font-bold text-white mt-8 mb-4">System Requirements:</h2>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li>Operating System: Windows 7/8/10 or macOS X 10.10+</li>
+                    <li>Processor: Intel Core i3 or equivalent</li>
+                    <li>Memory: 2 GB RAM</li>
+                    <li>Storage: 61 MB available space</li>
+                    <li>Release: Dec 2, 2023</li>
+                </ul>
             </div>
         </section>
 
-        <section id="my-tools-section" class="mb-12">
-            <h2 class="text-4xl font-bold text-white mb-6">Tools</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">Google Drive Direct Download Link Generator</h3>
-                    <a href="webapp/gdrive-generator/run.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                    <a href="https://drive.google.com/uc?export=download&id=1Jwqxh7sd2HBf_HcZer1ir7CxIjDo5zbw" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Tool</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">YouTube Subscribe Link Generator</h3>
-                    <a href="webapp/ytsub-generator/index.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">ProjectStadia</h3>
-                    <p>This app is a remake of DevTool and its WAY better!</p>
-                    <a href="https://stadiastudios.github.io/Stadia/index.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                </div>
+        <div class="mt-12 text-left max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4">Older Versions:</h2>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li>
+                        <a href="https://drive.google.com/uc?export=download&id=10t17QWp0GdRYfmHE5x_3qWh7_ts5j6VM" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.7 (File Size: ~28MB)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=download&id=1QhCbb-H6LtTz_Q-45jEdrpbMgZnfrMlz" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.6 (File Size: ~30MB)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=download&id=1J69hlyE4zWaIEQWYOjtQinseZyaXinOD" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.5 GE (File Size: ~12MB)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/uc?export=download&id=1Vc0WminQaihl0Hjc1cuzW94KwZp_EhJA" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.3 (File Size: ~566KB)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/file/d/1OELl-EF0sOOdx89wGEFZbWjfYJluyEKj/view?usp=sharing" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.2 (File Size:  ~633KB)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://drive.google.com/file/d/1teTI-fU3OJYmyp3XFJfgoheg2To14HQ0/view?usp=sharing" download class="text-blue-400 hover:text-blue-300 transition duration-300">
+                            SquareFlapper V1.1 (File Size: ~125KB)
+                        </a>
+                    </li>
+                    <!-- Add more older versions as needed -->
+                </ul>
             </div>
-        </section>
-
     </main>
 
     <footer class="text-center py-6 mt-8 text-gray-400 text-sm">
