@@ -3,242 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayonaise Library</title>
-    <link rel="icon" href="resources/favicon.png" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>MAYONAISE - HOME</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="rec/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark background */
-            color: #e2e8f0; /* Light gray text */
+            background-color: #111;
+            color: #e2e8f0;
         }
-        .container {
-            max-width: 1200px;
-        }
-        /* Custom styles for video responsiveness */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.5rem; /* Rounded corners for video container */
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
         /* Custom Scrollbar Styles */
-        /* For Webkit browsers (Chrome, Safari) */
         ::-webkit-scrollbar {
-            width: 12px; /* Width of the scrollbar */
+            width: 10px;
         }
-
         ::-webkit-scrollbar-track {
-            background: #2d3748; /* Color of the track */
-            border-radius: 10px;
+            background: #111;
         }
-
         ::-webkit-scrollbar-thumb {
-            background: #4a5568; /* Color of the scroll thumb */
-            border-radius: 10px;
-            border: 3px solid #2d3748; /* Creates a padding effect */
+            background: #eb2525;
+            border-radius: 5px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
-            background: #636b7a; /* Color of the scroll thumb on hover */
+            background: #eb2525;
         }
 
-        /* For Firefox */
-        html {
-            scrollbar-width: thin; /* "auto" or "thin" */
-            scrollbar-color: #4a5568 #2d3748; /* thumb color track color */
+        .nav-link-underline {
+            position: relative;
+        }
+        .nav-link-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: orange; /* blue-600 */
+            transform: scaleX(0);
+            transform-origin: bottom left;
+            transition: transform 0.3s ease-out;
+        }
+        .nav-link-underline:hover::after,
+        .nav-link-underline.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        .dropdown-menu {
+            display: none;
         }
 
-        /* Banner specific styles */
-        .banner {
-            background-image: url('resources/squareflapper-banner.png'); /* Placeholder banner image for game */
-            background-size: cover;
-            background-position: center;
-            height: 450px; /* Adjust height as needed */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .dropdown-menu.active {
+            display: block;
         }
     </style>
 </head>
-<body class="text-gray-100">
-    <nav class="bg-gray-800 p-4 shadow-lg sticky top-0 z-50">
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-gray-950 py-4 px-6 md:px-12 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-white text-2xl font-bold">Mayonaise Library</a>
+            <a href="index.html" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-400">MAYONAISE</a>
             
-            <!-- Mobile menu button -->
-            <div class="md:hidden">
-                <button id="mobileMenuButton" class="text-gray-300 hover:text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Desktop menu -->
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="index.html" class="text-red-500 hover:text-red-400 transition duration-300">Home</a>
-                <a href="mods.html" class="text-gray-300 hover:text-white transition duration-300">Mods</a>
-                <div class="relative">
-                    <button id="dropdownButton" class="text-gray-300 hover:text-white transition duration-300 focus:outline-none flex items-center">
-                        More
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Home</a>
+                <a href="downloads.html" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Downloads</a>
+                
+                <!-- Social Dropdown Menu -->
+                <div class="relative group">
+                    <button class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline cursor-pointer focus:outline-none">
+                        Social
                     </button>
-                    <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-1 hidden">
-                        <a href="https://youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">YouTube</a>
-                        <a href="https://discord.gg/R6VVZmBqZu" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">Discord</a>
-                        <a href="https://stadiastudios.github.io/Stadia/" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">StadiaStudios</a>
+                    <div class="dropdown-menu absolute z-10 hidden bg-gray-800 rounded-md shadow-lg py-2 mt-2 w-48 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:block">
+                        <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">YouTube</a>
+                        <a href="https://discord.gg/a7eNTUaYPh" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">Discord</a>
                     </div>
                 </div>
+            </nav>
+            
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (initially hidden) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black-900 py-4 px-6 text-center">
+        <a href="index.html" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Home</a>
+        <a href="downloads.html" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Downloads</a>
+        
+        <!-- Social Dropdown for Mobile -->
+        <div class="relative w-full">
+            <button id="mobile-social-button" class="block py-2 w-full text-gray-300 hover:text-white transition-colors duration-300 focus:outline-none">
+                Social
+            </button>
+            <div id="mobile-social-menu" class="hidden bg-gray-800 rounded-md py-2 mt-2">
+                <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">YouTube</a>
+                <a href="https://discord.gg/a7eNTUaYPh" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">Discord</a>
             </div>
         </div>
-
-        <!-- Mobile menu content -->
-        <div id="mobileMenu" class="md:hidden hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-red-500 hover:text-red-400 hover:bg-gray-700">Home</a>
-                <a href="mods.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Mods</a>
-                <div class="relative">
-                    <button id="mobileDropdownButton" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none flex items-center justify-between">
-                        More
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="mobileDropdownMenu" class="mt-1 w-full bg-gray-700 rounded-md shadow-lg py-1 hidden">
-                        <a href="https://youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">YouTube</a>
-                        <a href="https://discord.gg/R6VVZmBqZu" target="_blank" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">Discord</a>
-                        <a href="https://stadiastudios.github.io/Stadia/" class="block px-4 py-2 text-gray-200 hover:bg-gray-600 hover:text-white">StadiaStudios</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Banner Section -->
-    <div class="banner">
-        <h1 class="text-5xl md:text-6xl lg:text-7xl">MAYONAISE</h1>
     </div>
 
-    <main class="container mx-auto my-8 p-6 bg-gray-900 rounded-lg shadow-xl">
-        <section id="about-section" class="mb-12">
-            <h2 class="text-4xl font-bold text-white mb-6">About Me</h2>
-            <p class="text-lg text-gray-300 leading-relaxed">
-                Here you can find links Tools apps and more created by me, i re done this website but with a little bit of AI.
-                The main reason i switched from google sites to github was to code my website instead of using google
-            </p>
-        </section>
+    <!-- Hero Section -->
+    <section class="py-16 md:py-24 bg-gray-900 text-center relative overflow-hidden">
+        <div class="absolute inset-0 z-0 bg-cover bg-center opacity-20" style="background-image: url('rec/banner.jpg');"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-white drop-shadow-lg">MAYONAISE</h1>
+            <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                SUBSCRIBE NOW
+            </a>
+        </div>
+    </section>
 
-        <section id="my-games-section" class="mb-12">
-            <h2 class="text-4xl font-bold text-white mb-6">My Games</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">SquareFlapper</h3>
-                    <p class="text-gray-300 mb-4">This game is a 2D Game based on a Customizable Flappy Bird. This Game runs with a Software called Eblava which supports the maps, More maps are coming soon. Each map has its own unique Theme and Speed for gameplay.</p>
-                    <a href="squareflapper.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Page</a>
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-20 bg-gray-950">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-300">About</h2>
+            <div class="bg-gray-900 rounded-xl shadow-2xl p-8 transform transition-all duration-500 hover:scale-105">
+                <p class="text-gray-300 text-lg leading-relaxed text-center">
+                    Hello! Welcome to my website, Here you can find all my mods or downloads in the videos. If your here and for some reason dont know who i am. Im Mayonaise...Yes the white gue in your fridge. And im tired of not being touched in here
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery Section -->
+    <section id="videos" class="py-16 md:py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-300">Featured Videos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Video Card 1 -->
+                <div class="bg-gray-950 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105">
+                    <iframe class="w-full h-48 sm:h-56 md:h-64" src="https://www.youtube.com/embed/E2J1WzveXHw?si=VokA7ilmQ9Gfz7DO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">GTAV ONLINE - HOW TO GET THE RED DUFFLE BAG IN 2025! (EASIEST METHOD)</h3>
+                        <p class="text-gray-400">Their is no requirements to do this glitch its very simple, Anyone can do it.</p>
+                    </div>
+                </div>
+
+                <!-- Video Card 2 -->
+                <div class="bg-gray-950 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105">
+                    <iframe class="w-full h-48 sm:h-56 md:h-64" src="https://www.youtube.com/embed/US72-n1CJ9o?si=cD3EtuVwNkFOvyGQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">How to get WeMod Premium For Free in 2025! (Legit)</h3>
+                        <p class="text-gray-400">Discord: <a class="nav-link-underline" href="https://discord.gg/invite/a7eNTUaYPh">https://discord.gg/invite/a7eNTUaYPh</a> TempMail: <a class="nav-link-underline" href="https://temp-mail.org/en/">https://temp-mail.org/en/</a></p>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="bg-gray-950 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105">
+                    <iframe class="w-full h-48 sm:h-56 md:h-64" src="https://www.youtube.com/embed/C_J98I7y_vc?si=_dPKz515VSoahy2P" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">How to get cheats in FiveM (Fastrun, Aimbot, Car speed multiplier,)</h3>
+                        <p class="text-gray-400">Discord: <a class="nav-link-underline" href="https://discord.gg/invite/a7eNTUaYPh">https://discord.gg/invite/a7eNTUaYPh</a></p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="my-tools-section" class="mb-12">
-            <h2 class="text-4xl font-bold text-white mb-6">Tools</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">Google Drive Direct Download Link Generator</h3>
-                    <a href="webapp/gdrive-generator/run.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                    <a href="https://drive.google.com/uc?export=download&id=1Jwqxh7sd2HBf_HcZer1ir7CxIjDo5zbw" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Download Tool</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">YouTube Subscribe Link Generator</h3>
-                    <a href="webapp/ytsub-generator/index.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">ProjectStadia</h3>
-                    <p>This app is a remake of DevTool and its WAY better!</p>
-                    <a href="https://stadiastudios.github.io/Stadia/index.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">Fancy Text Generator</h3>
-                    <p>Generate Texts in these Fancy Fonts!</p>
-                    <a href="webapp/fancy-text-generator/index.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                </div>
-                <div class="bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-2xl font-semibold text-white mb-3">Online Notepad</h3>
-                    <p>OnlineNotepad with Open/Save/Local Features</p>
-                    <a href="webapp/online-notepad/index.html" download class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 inline-block mt-4">Use Tool</a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="text-center py-6 mt-8 text-gray-400 text-sm">
-        &copy; 2025 MAYONAISE. All rights reserved.
+    <!-- Footer Section -->
+    <footer class="bg-gray-950 py-6 text-center">
+        <p class="text-gray-500 text-sm">&copy; 2025 MAYONAISE. All rights reserved.</p>
     </footer>
 
     <script>
-        // JavaScript for dropdown functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownButton = document.getElementById('dropdownButton');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileDropdownButton = document.getElementById('mobileDropdownButton');
-            const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-            // Desktop dropdown
-            if (dropdownButton && dropdownMenu) {
-                dropdownButton.addEventListener('click', function() {
-                    dropdownMenu.classList.toggle('hidden');
-                });
-            }
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
 
-            // Mobile menu toggle
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
+            // Mobile social menu toggle
+            const mobileSocialButton = document.getElementById('mobile-social-button');
+            const mobileSocialMenu = document.getElementById('mobile-social-menu');
+            
+            mobileSocialButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileSocialMenu.classList.toggle('hidden');
+            });
 
-            // Mobile dropdown
-            if (mobileDropdownButton && mobileDropdownMenu) {
-                mobileDropdownButton.addEventListener('click', function() {
-                    mobileDropdownMenu.classList.toggle('hidden');
-                });
-            }
+            // Get the current page URL path
+            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-            // Close all dropdowns if the user clicks outside of them
-            window.addEventListener('click', function(event) {
-                if (dropdownButton && dropdownMenu && !dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.add('hidden');
-                }
-                if (mobileDropdownButton && mobileDropdownMenu && !mobileDropdownButton.contains(event.target) && !mobileDropdownMenu.contains(event.target)) {
-                    mobileDropdownMenu.classList.add('hidden');
-                }
-                // Keep mobile menu open if clicking inside it, close if clicking outside nav entirely
-                if (mobileMenu && !mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target) && !event.target.closest('nav')) {
-                    mobileMenu.classList.add('hidden');
+            // Find all navigation links and add the 'active' class to the one that matches the current URL
+            const navLinks = document.querySelectorAll('.nav-link-underline');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
                 }
             });
         });
     </script>
-
 </body>
 </html>
