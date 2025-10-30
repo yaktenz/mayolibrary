@@ -29,6 +29,7 @@
             background: rgba(151, 98, 0, 0.801);
         }
 
+        /* --- NAVBAR-SPECIFIC STYLES (REQUIRED FOR navbar.js) --- */
         .nav-link-underline {
             position: relative;
         }
@@ -39,7 +40,7 @@
             height: 2px;
             bottom: -4px;
             left: 0;
-            background-color: orange; /* blue-600 */
+            background-color: orange;
             transform: scaleX(0);
             transform-origin: bottom left;
             transition: transform 0.3s ease-out;
@@ -49,6 +50,8 @@
             transform: scaleX(1);
             transform-origin: bottom left;
         }
+        /* Note: The dropdown logic for desktop uses the 'group' and 'group-hover' Tailwind classes, 
+           but we keep the dropdown-menu class for the mobile implementation */
         .dropdown-menu {
             display: none;
         }
@@ -56,6 +59,8 @@
         .dropdown-menu.active {
             display: block;
         }
+        /* --- END NAVBAR STYLES --- */
+
 
         /* NEW: Full-screen hero section and fixed background for cover effect */
         .hero-section-full {
@@ -95,56 +100,7 @@
 </head>
 <body class="antialiased">
 
-    <!-- Header Section (Sticky) -->
-    <header class="bg-gray-950 py-4 px-6 md:px-12 shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-400">MAYONAISE</a>
-            
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden md:flex space-x-6">
-                <a href="index.html" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Home</a>
-                <a href="downloads.html" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Downloads</a>
-                
-                <!-- Social Dropdown Menu -->
-                <div class="relative group">
-                    <button class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline cursor-pointer focus:outline-none">
-                        Social
-                    </button>
-                    <div class="dropdown-menu absolute z-10 hidden bg-gray-800 rounded-md shadow-lg py-2 mt-2 w-48 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:block">
-                        <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">YouTube</a>
-                        <a href="https://discord.gg/a7eNTUaYPh" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">Discord</a>
-                        <!-- New StadiaStudios Link -->
-                        <a href="https://stadiastudios.github.io/stadia/" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">StadiaStudios</a>
-                    </div>
-                </div>
-            </nav>
-            
-            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-    </header>
-
-    <!-- Mobile Menu (initially hidden) -->
-    <div id="mobile-menu" class="hidden md:hidden bg-black-900 py-4 px-6 text-center">
-        <a href="index.html" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Home</a>
-        <a href="downloads.html" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300">Downloads</a>
-        
-        <!-- Social Dropdown for Mobile -->
-        <div class="relative w-full">
-            <button id="mobile-social-button" class="block py-2 w-full text-gray-300 hover:text-white transition-colors duration-300 focus:outline-none">
-                Social
-            </button>
-            <div id="mobile-social-menu" class="hidden bg-gray-800 rounded-md py-2 mt-2">
-                <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">YouTube</a>
-                <a href="https://discord.gg/a7eNTUaYPh" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">Discord</a>
-                <!-- New StadiaStudios Link -->
-                <a href="https://stadiastudios.github.io/Stadia/" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 rounded-md transition-colors duration-300">StadiaStudios</a>
-            </div>
-        </div>
-    </div>
+    <!-- The Navbar is now injected here by navbar.js -->
 
     <!-- Hero Section (Updated for Full-Screen Cover Effect) -->
     <!-- The padding classes py-24 md:py-40 are removed and replaced with the custom CSS class hero-section-full -->
@@ -257,43 +213,23 @@
         <p class="text-gray-500 text-sm">&copy; 2025 MAYONAISE. All rights reserved.</p>
     </footer>
 
+    <!-- Import the reusable navbar module -->
+    <script type="module" src="navbar.js"></script>
+    
+    <!-- Local scripts specific to this page -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Mobile social menu toggle
-            const mobileSocialButton = document.getElementById('mobile-social-button');
-            const mobileSocialMenu = document.getElementById('mobile-social-menu');
-            
-            mobileSocialButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                mobileSocialMenu.classList.toggle('hidden');
-            });
-
-            // Get the current page URL path
-            const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-
-            // Find all navigation links and add the 'active' class to the one that matches the current URL
-            const navLinks = document.querySelectorAll('.nav-link-underline');
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-            
-            // Smooth scrolling for the scroll indicator
-            document.querySelector('.scroll-indicator').addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
+            // Smooth scrolling for the scroll indicator (This is specific to index.html and stays here)
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
-            });
+            }
         });
     </script>
 </body>
