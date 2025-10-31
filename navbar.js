@@ -17,6 +17,7 @@ const navbarHTML = `
             <nav class="hidden md:flex space-x-6">
                 <a href="index.html" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Home</a>
                 <a href="downloads.html" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Downloads</a>
+                <a href="https://yaktenz.github.io/youngdollazz" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Music</a>
                 
                 <!-- Social Dropdown Menu -->
                 <!-- UPDATED: Added duration-200 and delay-100 to smooth out closing -->
@@ -50,6 +51,7 @@ const navbarHTML = `
     <div id="mobile-menu" class="hidden md:hidden bg-black-900 py-4 px-6 text-center">
         <a href="index.html" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Home</a>
         <a href="downloads.html" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Downloads</a>
+        <a href="https://yaktenz.github.io/youngdollazz" target="_blank" class="block py-2 text-gray-300 hover:text-white transition-colors duration-300 nav-link-underline">Music</a>
         
         <!-- Social Dropdown for Mobile -->
         <div class="relative w-full">
