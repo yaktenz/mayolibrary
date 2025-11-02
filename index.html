@@ -3,234 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAYONAISE - HOME</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="rec/favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Mayonaise | Official Website</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for custom colors and font --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Your requested background color
+                        'darkest': '#111111',
+                        // A bright red for YouTube links/CTAs
+                        'youtubeRed': '#FF0000',
+                        'youtubeRedHover': '#CC0000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
+        /* Apply the custom font to the body */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111;
-            color: #e2e8f0;
+            scroll-behavior: smooth;
         }
-        /* Custom Scrollbar Styles */
+        /* Custom scrollbar for better aesthetics on dark mode */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #111;
+            background: #222;
         }
         ::-webkit-scrollbar-thumb {
-            background: orange;
-            border-radius: 5px;
+            background: #555;
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(151, 98, 0, 0.801);
+            background: #777;
         }
 
-        /* --- NAVBAR-SPECIFIC STYLES (REQUIRED FOR navbar.js) --- */
-        .nav-link-underline {
-            position: relative;
+        /* Basic keyframe for a subtle fade-in effect on load */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .nav-link-underline::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: orange;
-            transform: scaleX(0);
-            transform-origin: bottom left;
-            transition: transform 0.3s ease-out;
-        }
-        .nav-link-underline:hover::after,
-        .nav-link-underline.active::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-        /* Note: The dropdown logic for desktop uses the 'group' and 'group-hover' Tailwind classes, 
-           but we keep the dropdown-menu class for the mobile implementation */
-        .dropdown-menu {
-            display: none;
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
         }
 
-        .dropdown-menu.active {
-            display: block;
-        }
-        /* --- END NAVBAR STYLES --- */
-
-
-        /* NEW: Full-screen hero section and fixed background for cover effect */
-        .hero-section-full {
-            min-height: 100vh; /* Ensures it covers 100% of the viewport height */
-            /* Flex to center content vertically */
+        /* Styling for the Hamburger Icon (using pure CSS for the icon) */
+        .hamburger-icon {
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-direction: column;
-            padding-bottom: 50px; /* Space for the scroll arrow */
+            justify-content: space-around;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
         }
-        
-        .hero-background-fixed {
-            background-attachment: fixed; /* This creates the scroll-down parallax effect */
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
+        .hamburger-icon span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
         }
-
-        /* Scroll Down Arrow Animation */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
+        /* Animation for when the menu is open (transforms to an 'X') */
+        .hamburger-icon.open span:nth-child(1) {
+            transform: translateY(10.5px) rotate(45deg);
         }
-
-        .scroll-indicator {
-            animation: bounce 2s infinite;
+        .hamburger-icon.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-icon.open span:nth-child(3) {
+            transform: translateY(-10.5px) rotate(-45deg);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-darkest text-gray-200 min-h-screen">
 
-    <!-- The Navbar is now injected here by navbar.js -->
+    <!-- Header / Navigation --><header class="sticky top-0 z-20 bg-darkest/95 backdrop-blur-sm shadow-xl border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Channel Name - REPLACED WITH PNG PLACEHOLDER --><a href="#" class="text-2xl font-extrabold flex items-center space-x-2 text-white hover:text-youtubeRed transition duration-300">
+                <img src="rec/icons/normal-png.png" alt="Channel Logo" class="w-6 h-6 rounded-full" onerror="this.onerror=null;this.src='rec/icons/normal-png.png'">
+                <span>MAYONAISE</span>
+            </a>
 
-    <!-- Hero Section (Updated for Full-Screen Cover Effect) -->
-    <!-- The padding classes py-24 md:py-40 are removed and replaced with the custom CSS class hero-section-full -->
-    <section class="hero-section-full bg-gray-900 text-center relative overflow-hidden">
-        <!-- Background Layer: Added hero-background-fixed class for the parallax effect -->
-        <div class="absolute inset-0 z-0 opacity-30 hero-background-fixed" style="background-image: url('rec/banner.jpg');"></div>
-        
-        <!-- Content Layer -->
-        <div class="container mx-auto px-6 relative z-10 text-white">
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg">MAYONAISE</h1>
-            <p class="text-xl md:text-2xl mb-10 font-medium text-gray-200">The best source for mods, tutorials, and content.</p>
-            <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl ring-4 ring-red-500/50">
-                SUBSCRIBE NOW
+            <!-- Hamburger Menu Button (Mobile Only) --><button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-[#333] transition duration-200" aria-label="Toggle navigation">
+                <div class="hamburger-icon" id="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+
+            <!-- Desktop Navigation and Subscribe Button (Hidden on Mobile) --><div class="hidden md:flex items-center space-x-6">
+                <nav class="flex space-x-6">
+                    <a href="#home" class="text-gray-300 hover:text-[white] transition duration-300 font-medium">Home</a>
+                    <a href="#videos" class="text-gray-300 hover:text-[white] transition duration-300 font-medium">Latest Videos</a>
+                    <a href="#contact" class="text-gray-300 hover:text-[white] transition duration-300 font-medium">Stream</a>
+                    <!-- Social Dropdown (Desktop Only) --><div class="relative group">
+                        <button class="text-gray-300 hover:text-[white] transition duration-300 font-medium cursor-pointer focus:outline-none">
+                            Social
+                        </button>
+                        <div class="absolute z-10 hidden bg-[#111] rounded-md shadow-lg py-2 mt-2 w-48 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:block hover:delay-100">
+                            <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] rounded-md transition-colors duration-300">YouTube</a>
+                            <a href="https://discord.gg/a7eNTUaYPh" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] rounded-md transition-colors duration-300">Discord</a>
+                            <a href="https://stadiastudios.github.io/stadia/" target="_blank" class="block px-4 py-2 text-sm text-gray-300 hover:bg-[#333] rounded-md transition-colors duration-300">StadiaStudios</a>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Subscribe Button (Desktop Only) --><a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="bg-youtubeRed hover:bg-youtubeRedHover text-white py-2 px-4 rounded-full font-semibold shadow-lg transform hover:scale-105 transition duration-300">
+                    Subscribe
+                </a>
+            </div>
+        </div>
+        <!-- Mobile Menu Drawer (Hidden by default, shown via JS) --><div id="mobile-menu" class="hidden md:hidden absolute w-full bg-darkest/95 backdrop-blur-sm border-t border-gray-800 shadow-xl transition-all duration-300 ease-in-out">
+            <nav class="flex flex-col p-4 space-y-2">
+                <a href="#home" class="mobile-nav-link block px-4 py-2 text-lg text-gray-300 hover:bg-[#333] rounded-md transition duration-200 font-medium">Home</a>
+                <a href="#videos" class="mobile-nav-link block px-4 py-2 text-lg text-gray-300 hover:bg-[#333] rounded-md transition duration-200 font-medium">Latest Videos</a>
+                <a href="#contact" class="mobile-nav-link block px-4 py-2 text-lg text-gray-300 hover:bg-[#333] rounded-md transition duration-200 font-medium">Stream</a>
+                
+                <!-- Mobile Social Links --><p class="px-4 pt-4 text-sm font-semibold text-gray-500 uppercase">Social Accounts</p>
+                <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="mobile-nav-link block px-4 py-2 text-lg text-gray-300 hover:bg-[#333] rounded-md transition duration-200 font-medium">YouTube</a>
+                <a href="https://discord.gg/a7eNTUaYPh" target="_blank" class="mobile-nav-link block px-4 py-2 text-lg text-gray-300 hover:bg-[#333] rounded-md transition duration-200 font-medium">Discord</a>
+                <a href="https://stadiastudios.github.io/stadia/" target="_blank" class="mobile-nav-link block px-4 py-2 text-lg text-gray-300 hover:bg-[#333] rounded-md transition duration-200 font-medium">StadiaStudios</a>
+                
+                <!-- Mobile Subscribe Button --><a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="mobile-nav-link block mt-4 mx-4 bg-youtubeRed hover:bg-youtubeRedHover text-white py-3 text-center rounded-xl font-semibold shadow-lg transition duration-300">
+                    Subscribe Now
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. Hero Section --><section id="home" class="pt-20 pb-28 text-center fade-in">
+            <h1 class="text-5xl sm:text-7xl font-extrabold text-white mb-6 leading-tight">
+                Welcome To <span class="text-youtubeRed">MAYOLIBRARY</span> Explore My Tutorials.
+            </h1>
+
+            <!-- Call to Action Block --><div class="space-y-4 sm:space-y-0 sm:space-x-6 flex flex-col sm:flex-row justify-center">
+                <a href="https://youtu.be/E2J1WzveXHw?si=Ng10Svt0sc_GX8TM" target="_blank" class="inline-flex items-center justify-center bg-white text-darkest py-3 px-8 rounded-xl font-bold text-lg shadow-2xl shadow-youtubeRed/50 transform hover:scale-105 transition duration-300 ease-in-out group">
+                    <!-- REPLACED WITH PNG PLACEHOLDER --><img src="rec/icons/play.png" alt="Play Icon" class="w-6 h-6 mr-3" onerror="this.onerror=null;this.src='https://placehold.co/24x24/FFFFFF/000000?text=▶'">
+                    Watch Latest Video
+                </a>
+                <a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="inline-flex items-center justify-center border-2 border-youtubeRed text-youtubeRed py-3 px-8 rounded-xl font-bold text-lg hover:bg-youtubeRed hover:text-white transition duration-300 ease-in-out transform hover:scale-105">
+                    Subscribe Now!
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. Featured Videos Section --><section id="videos" class="py-16 fade-in" style="animation-delay: 0.2s;">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-white text-center mb-12">
+                Featured Content
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Video Card 1 --><div class="bg-[#1a1a1a] rounded-xl overflow-hidden shadow-2xl hover:shadow-youtubeRed/50 transition duration-300 transform hover:translate-y-[-5px]">
+                    <a href="https://youtu.be/E2J1WzveXHw?si=Ng10Svt0sc_GX8TM" target="_blank">
+                        <!-- Placeholder Image (replace with actual thumbnail if desired) --><div class="aspect-video bg-gray-700 flex items-center justify-center relative">
+                            <img src="rec/thumbnails/1.jpg" alt="Video Placeholder" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x337/333333/ffffff?text=Video+1+Thumbnail'">
+                            <span class="absolute text-white text-xl font-bold p-2 bg-black/50 rounded-lg">PLAY</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-semibold text-white mb-1 hover:text-youtubeRed transition duration-200">GTAV ONLINE - HOW TO GET THE RED DUFFLE BAG IN 2025! (EASIEST METHOD)</h3>
+                            <p class="text-sm text-gray-400">Published Sep 1, 2025 • 283 Views</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Video Card 2 --><div class="bg-[#1a1a1a] rounded-xl overflow-hidden shadow-2xl hover:shadow-youtubeRed/50 transition duration-300 transform hover:translate-y-[-5px]">
+                    <a href="https://youtu.be/ydGriACy_WQ?si=rpshWajFz3hNaPAH" target="_blank">
+                        <div class="aspect-video bg-gray-700 flex items-center justify-center relative">
+                            <img src="rec/thumbnails/2.jpg" alt="Video Placeholder" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x337/333333/ffffff?text=Video+2+Thumbnail'">
+                            <span class="absolute text-white text-xl font-bold p-2 bg-black/50 rounded-lg">PLAY</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-semibold text-white mb-1 hover:text-youtubeRed transition duration-200">Red Dead Redemption in 2025…</h3>
+                            <p class="text-sm text-gray-400">Published Jan 7, 2025 • 236 Views</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Video Card 3 --><div class="bg-[#1a1a1a] rounded-xl overflow-hidden shadow-2xl hover:shadow-youtubeRed/50 transition duration-300 transform hover:translate-y-[-5px]">
+                    <a href="https://youtu.be/kfQjpGVpvaQ?si=KQYcVEGMmWGHEHLr" target="_blank">
+                        <div class="aspect-video bg-gray-700 flex items-center justify-center relative">
+                            <img src="rec/thumbnails/3.jpg" alt="Video Placeholder" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x337/333333/ffffff?text=Video+3+Thumbnail'">
+                            <span class="absolute text-white text-xl font-bold p-2 bg-black/50 rounded-lg">PLAY</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-semibold text-white mb-1 hover:text-youtubeRed transition duration-200">How to get WeMod Premium For Free in 2025! (Legit)</h3>
+                            <p class="text-sm text-gray-400">Published July 3, 2025 • 3.7K Views</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. Social & Contact Section --><section id="contact" class="py-20 fade-in" style="animation-delay: 0.4s;">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    Social
+                </h2>
+                <p class="text-lg text-gray-400 mb-8">
+                    Heres currently all my social accounts.
+                </p>
+
+                <div class="flex justify-center space-x-6">
+                    <!-- YouTube Icon - REPLACED WITH PNG PLACEHOLDER --><a href="https://www.youtube.com/@TheRealMayo_?sub_confirmation=1" target="_blank" class="w-14 h-14 flex items-center justify-center bg-youtubeRed hover:bg-youtubeRedHover text-white rounded-full transition duration-300 shadow-xl transform hover:scale-110 p-2">
+                         <img src="rec/icons/yt.png" alt="YouTube Icon" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/40x40/FF0000/FFFFFF?text=YT'">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PassPro Advertisement Section --><section id="passpro-ad" class="py-12 bg-[#1a1a1a] border-t border-b border-gray-800 shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <!-- Ad Content --><div class="text-white flex items-center justify-center md:justify-start">
+                <!-- PassPro Icon (PNG) --><img src="rec/app-icons/passpro.png" alt="PassPro Icon" class="w-7 h-7 mr-2" onerror="this.onerror=null;this.src='https://placehold.co/28x28/FF0000/FFFFFF?text=PP'">
+                <h3 class="text-2l font-extrabold">
+                    PassPro: Never Forget a Password Again. Safe and Secure PassWord manager made by Mayonaise.
+                </h3>
+            </div>
+            
+            <!-- Call to Action Button --><a href="https://stadiastudios.github.io/passpro" target="_blank" class="w-full md:w-auto inline-flex items-center justify-center bg-[blue] hover:bg-[darkblue] text-white py-3 px-8 rounded-none font-bold shadow-xl transform hover:scale-[1.02] transition duration-300 ease-in-out">
+                Learn More
             </a>
         </div>
-
-        <!-- Scroll Down Indicator -->
-        <!-- Added a link to the first content section for smooth scrolling -->
-        <a href="#about" class="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20 text-white hover:text-red-500 transition-colors duration-300 scroll-indicator" aria-label="Scroll down to content">
-            <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-            </svg>
-        </a>
     </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 md:py-20 bg-gray-950">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-300">About</h2>
-            <div class="bg-gray-900 rounded-xl shadow-2xl p-8 transform transition-all duration-500 hover:scale-105">
-                <p class="text-gray-300 text-lg leading-relaxed text-center">
-                    Hello! Welcome to my website, Here you can find all my mods or downloads in the videos. If your here and for some reason dont know who i am. Im Mayonaise...Yes the white gue in your fridge. And im tired of not being touched in here
-                </p>
-            </div>
+    <!-- End PassPro Advertisement Section --><!-- Footer --><footer class="mt-0 py-8 border-t border-gray-800 bg-[#161616]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            &copy; <span id="current-year"></span> Mayonaise. All Rights Reserved.
         </div>
-    </section>
-
-    <!-- Video Gallery Section -->
-    <section id="videos" class="py-16 md:py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-300">Featured Videos</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Video Card 1 -->
-                <div class="bg-gray-950 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105">
-                    <iframe class="w-full h-48 sm:h-56 md:h-64" src="https://www.youtube.com/embed/E2J1WzveXHw?si=VokA7ilmQ9Gfz7DO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white mb-2">GTAV ONLINE - HOW TO GET THE RED DUFFLE BAG IN 2025! (EASIEST METHOD)</h3>
-                        <p class="text-gray-400">Their is no requirements to do this glitch its very simple, Anyone can do it.</p>
-                    </div>
-                </div>
-
-                <!-- Video Card 2 -->
-                <div class="bg-gray-950 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105">
-                    <iframe class="w-full h-48 sm:h-56 md:h-64" src="https://www.youtube.com/embed/US72-n1CJ9o?si=cD3EtuVwNkFOvyGQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white mb-2">How to get WeMod Premium For Free in 2025! (Legit)</h3>
-                        <p class="text-gray-400">Discord: <a class="nav-link-underline" href="https://discord.gg/invite/a7eNTUaYPh">https://discord.gg/invite/a7eNTUaYPh</a> TempMail: <a class="nav-link-underline" href="https://temp-mail.org/en/">https://temp-mail.org/en/</a></p>
-                    </div>
-                </div>
-
-                <!-- Video Card 3 -->
-                <div class="bg-gray-950 rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105">
-                    <iframe class="w-full h-48 sm:h-56 md:h-64" src="https://www.youtube.com/embed/C_J98I7y_vc?si=_dPKz515VSoahy2P" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-white mb-2">How to get cheats in FiveM (Fastrun, Aimbot, Car speed multiplier,)</h3>
-                        <p class="text-gray-400">Discord: <a class="nav-link-underline" href="https://discord.gg/invite/a7eNTUaYPh">https://discord.gg/invite/a7eNTUaYPh</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEO Tools Section -->
-    <section id="seo-tools" class="py-16 md:py-20 bg-gray-950">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-300">SEO Tools</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- SEO Tool 1 -->
-                <div class="bg-gray-900 rounded-xl shadow-xl p-6 flex flex-col items-center text-center transform transition-all duration-300 hover:scale-105">
-                    <h3 class="text-2xl font-semibold text-white mb-3">YT Video ID Finder</h3>
-                    <p class="text-gray-400 mb-6">Paste YouTube URLs to instantly get its Video ID.</p>
-                    <a href="https://stadiastudios.github.io/pedwatch/webapp/idfinder.html" target="_blank" class="mt-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition-all duration-300">
-                        Use Online
-                    </a>
-                </div>
-
-                <!-- SEO Tool 2 -->
-                <div class="bg-gray-900 rounded-xl shadow-xl p-6 flex flex-col items-center text-center transform transition-all duration-300 hover:scale-105">
-                    <h3 class="text-2xl font-semibold text-white mb-3">YDrive</h3>
-                    <p class="text-gray-400 mb-6">Local Drive app</p>
-                    <a href="https://stadiastudios.github.io/ydrive/" target="_blank" class="mt-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition-all duration-300">
-                        Use Online
-                    </a>
-                </div>
-
-                <!-- SEO Tool 3 -->
-                <div class="bg-gray-900 rounded-xl shadow-xl p-6 flex flex-col items-center text-center transform transition-all duration-300 hover:scale-105">
-                    <h3 class="text-2xl font-semibold text-white mb-3">PassPro</h3>
-                    <p class="text-gray-400 mb-6">Password manager safest and fastest.</p>
-                    <a href="https://answerthepublic.com/" target="_blank" class="mt-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition-all duration-300">
-                        Use Online
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer class="bg-gray-950 py-6 text-center">
-        <p class="text-gray-500 text-sm">&copy; 2025 MAYONAISE. All rights reserved.</p>
     </footer>
 
-    <!-- Import the reusable navbar module -->
-    <script type="module" src="navbar.js"></script>
-    
-    <!-- Local scripts specific to this page -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Smooth scrolling for the scroll indicator (This is specific to index.html and stays here)
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (scrollIndicator) {
-                scrollIndicator.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    document.querySelector(targetId).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+        // Set the current year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Simple smooth scrolling for internal links (optional, but nice)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Close the mobile menu if a link is clicked
+                const mobileMenu = document.getElementById('mobile-menu');
+                const hamburgerIcon = document.getElementById('hamburger-icon');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('open');
+                }
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            }
+            });
         });
+
+        // Hamburger Menu Toggle Logic
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+
+            // Toggle Tailwind's 'hidden' class on the menu
+            mobileMenu.classList.toggle('hidden');
+            // Toggle the 'open' class for the CSS icon animation
+            hamburgerIcon.classList.toggle('open');
+        });
+
+        // Add the fade-in class to elements after load for the animation effect
+        window.onload = function() {
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                // Remove the style attribute to let CSS handle the delay
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        };
     </script>
 </body>
 </html>
-
