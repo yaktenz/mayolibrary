@@ -1,0 +1,21 @@
+{
+  "name": "Mayonaise",
+  "short_name": "Mayonaise",
+  "description": "Official Mayonaise WebApp.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#111",
+  "theme_color": "#111",
+  "icons": [
+    {
+      "src": "assets/favicon.jpg",
+      "sizes": "240x240",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/favicon.jpg",
+      "sizes": "240x240",
+      "type": "image/png"
+    }
+  ]
+}
